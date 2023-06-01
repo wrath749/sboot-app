@@ -26,21 +26,11 @@ jobs:
   test:
 
     strategy:
-      max-parallel: 2
       matrix:
-        os: [ubuntu-20.04, ubuntu-22.04]
         browser: [chrome, firefox]
         device: [desktop, mobile]
-        include:
-          - os: windows-latest
-            browser: edge
-            device: desktop
-        exclude:
-          - os: ubuntu-20.04
-            browser: chrome
-            device: mobile
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-22.04
 
     timeout-minutes: 10
 
@@ -53,7 +43,7 @@ jobs:
 
       - name: Demo of how to access current matrix context
         run: |
-          echo "Browser: ${{ matrix.browser }}
+          echo "Browser:" ${{ matrix.browser }}
           echo "Device: ${{ matrix.device }}"
 
       - name: Step inside test job
